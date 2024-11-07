@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Model;
-using WebApi.ViewModel;
+using WebApi.Application.ViewModel;
+using WebApi.Domain.Model;
 
 namespace WebApi.Controllers
 {
@@ -57,8 +57,8 @@ namespace WebApi.Controllers
         {
             _logger.Log(LogLevel.Error, "Houve um erro!");
 
-            // Simulação de erro
-            throw new Exception("Erro de Teste");
+            /*// Simulação de erro
+            throw new Exception("Erro de Teste");*/
 
             var employees = _employeeRepository.Get(pageNumber, pageQuantity);
 

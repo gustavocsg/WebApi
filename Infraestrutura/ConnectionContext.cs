@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Data;
-using WebApi.Model;
+using WebApi.Domain.Model;
 
 namespace WebApi.Infraestrutura
 {

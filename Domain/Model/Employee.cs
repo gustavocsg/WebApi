@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebApi.Model
+namespace WebApi.Domain.Model
 {
     [Table("employee")]
     public class Employee
@@ -13,7 +13,7 @@ namespace WebApi.Model
         public string? photo { get; private set; }
 
         public Employee() { }
-        public Employee(string name, int age, string photo) 
+        public Employee(string name, int age, string photo)
         {
             this.name = name ?? throw new ArgumentNullException(nameof(name));
             this.age = age;
