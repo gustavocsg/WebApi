@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
@@ -6,10 +7,11 @@ using WebApi.Application.DTOs;
 using WebApi.Application.ViewModel;
 using WebApi.Domain.Model.EmployeeAggregate;
 
-namespace WebApi.Controllers
+namespace WebApi.Controllers.v1
 {
     [ApiController]
-    [Route("api/v1/employee")]
+    [Route("api/v{version:apiVersion}/employee")]
+    [ApiVersion("1.0")]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -22,17 +24,6 @@ namespace WebApi.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-
-        //public EmployeeController(IEmployeeRepository employeeRepository, ILogger<EmployeeController> logger)
-        //{
-        //    _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
-        //    _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        //}
-
-        //public EmployeeController(IEmployeeRepository employeeRepository)
-        //{
-        //    _employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
-        //}
 
         [Authorize]
         [HttpPost]

@@ -1,3 +1,4 @@
+using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -5,6 +6,7 @@ using System.Text;
 using WebApi;
 using WebApi.Application.DTOs;
 using WebApi.Application.Mapping;
+using WebApi.Application.Swagger;
 using WebApi.Domain.Model.EmployeeAggregate;
 using WebApi.Infraestrutura.Repositories;
 
@@ -18,8 +20,23 @@ builder.Services.AddAutoMapper(typeof(DomainToDTOMapping));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+//builder.Services.AddSwaggerGen(x);
+
+builder.Services.AddApiVersioning()
+    .AddMvc()
+    .AddApiExplorer(setup =>
+    {
+        setup.GroupNameFormat = "'v'VVV";
+        setup.SubstituteApiVersionInUrl = true;
+    });
+
+builder.Services.ConfigureOptions<ConfigureSwaggerGenOptions>();
+
 builder.Services.AddSwaggerGen(c =>
 {
+    c.OperationFilter<SwaggerDefaultValues>();
+
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -76,7 +93,15 @@ if (app.Environment.IsDevelopment())
     //app.UseExceptionHandler("/error");
     app.UseExceptionHandler("/error-development");
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        var version = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+
+        foreach (var description in version.ApiVersionDescriptions)
+        {
+            options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", $"Web API - {description.GroupName.ToUpper()}");
+        }
+    });
 }
 else
 {

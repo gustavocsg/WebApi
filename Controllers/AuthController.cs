@@ -6,6 +6,7 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/v1/auth")]
+    //[Route("api/v{version:apiVersion}/auth")]
     public class AuthController : Controller
     {
         [HttpPost]
