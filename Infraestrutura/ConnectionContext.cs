@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Data;
-using WebApi.Domain.Model;
+using WebApi.Domain.Model.CompanyAggregate;
+using WebApi.Domain.Model.EmployeeAggregate;
 
 namespace WebApi.Infraestrutura
 {
@@ -14,6 +15,8 @@ namespace WebApi.Infraestrutura
         //{
         //    _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         //}
+
+        public DbSet<Company> Company { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WebApi;Trusted_Connection=True;MultipleActiveResultSets=true");
         //{

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
 using WebApi.Application.DTOs;
 using WebApi.Application.ViewModel;
-using WebApi.Domain.Model;
+using WebApi.Domain.Model.EmployeeAggregate;
 
 namespace WebApi.Controllers
 {

@@ -5,7 +5,7 @@ using System.Text;
 using WebApi;
 using WebApi.Application.DTOs;
 using WebApi.Application.Mapping;
-using WebApi.Domain.Model;
+using WebApi.Domain.Model.EmployeeAggregate;
 using WebApi.Infraestrutura.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
