@@ -66,6 +66,17 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "MyPolicy",
+        policy =>
+        {
+            policy.WithOrigins("https://google.com.br", "https://youtube.com")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
+
 var key = Encoding.ASCII.GetBytes(WebApi.Key.Secret);
 
 builder.Services.AddAuthentication(x => 
@@ -107,6 +118,8 @@ else
 {
     app.UseExceptionHandler("/error");
 }
+
+app.UseCors("MyPolicy");
 
 app.UseHttpsRedirection();
 
